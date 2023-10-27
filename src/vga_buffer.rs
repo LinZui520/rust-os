@@ -1,7 +1,7 @@
-use core::fmt::{Write, Result, Arguments};
+use core::fmt::{Arguments, Result, Write};
 
-use spin::Mutex;
 use lazy_static::lazy_static;
+use spin::Mutex;
 use volatile::Volatile;
 
 #[allow(dead_code)]
@@ -58,10 +58,10 @@ pub struct Writer {
 }
 
 lazy_static! {
-    pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer { 
+    pub static ref WRITER: Mutex<Writer> = Mutex::new(Writer {
         column_position: 0,
         color_code: ColorCode::new(Color::White, Color::Black),
-        buffer: unsafe { &mut *(0xb8000 as *mut Buffer)  }
+        buffer: unsafe { &mut *(0xb8000 as *mut Buffer) }
     });
 }
 
@@ -100,7 +100,7 @@ impl Writer {
         for row in 1..BUFFER_HEIGHT {
             for col in 0..BUFFER_WIDTH {
                 let character = self.buffer.chars[row][col].read();
-                self.buffer.chars[row-1][col].write(character);
+                self.buffer.chars[row - 1][col].write(character);
             }
         }
         self.clear_row(BUFFER_HEIGHT - 1);
