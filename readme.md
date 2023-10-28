@@ -35,7 +35,13 @@ $ sudo pacman -S qemu-full
 ## 运行
 
 ```sh
-$ ./run.sh
+$ cargo run
+```
+
+或者
+
+```sh
+$ cargo run --release
 ```
 
 > 如果运行不了 那也正常 毕竟实力有限🤪
